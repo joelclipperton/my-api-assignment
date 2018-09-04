@@ -103,17 +103,19 @@ const unifiedServer = (req, res) => {
 // Define all the handlers
 var handlers = {};
 
-// Sample handler
-handlers.sample = (data,callback) => {
-    callback(200, {'name':'sample handler'});
-};
-
+// Ping Handler
 handlers.ping = (data,callback) => {
   callback(200);
 };
 
+// Ping Handler
+handlers.hello = (data,callback) => {
+  callback(200, { 'message': 'hello people!' });
+};
+
+// Stop 404s from occuring until I can serve the favicon for real
 handlers.favIcon = (data, callback) => {
-  callback(200, { 'icon': 'nothing'} )
+  callback(200, { 'icon': 'not serving an icon yet. will need to set this up!'});
 }
 
 // Not found handler
@@ -123,7 +125,7 @@ handlers.notFound = (data,callback) => {
 
 // Define the request router
 var router = {
-  'sample' : handlers.sample,
   'ping': handlers.ping,
+  'hello': handlers.hello,
   'favicon.ico': handlers.favIcon
 };
